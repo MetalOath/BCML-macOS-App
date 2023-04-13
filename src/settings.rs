@@ -185,6 +185,8 @@ impl Settings {
             } else {
                 #[cfg(target_os = "windows")]
                 return Some(self.cemu_dir.join("graphicPacks/BreathOfTheWild_BCML"));
+                #[cfg(target_os = "macos")]
+                return Some(dirs2::data_dir().expect("Big problems if no data dir").join("Cemu/graphicPacks/BreathOfTheWild_BCML"));
                 #[cfg(target_os = "linux")]
                 return Some("~/.local/share/cemu/graphicPacks/BreathOfTheWild_BCML".into());
             }

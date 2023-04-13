@@ -536,6 +536,8 @@ def get_data_dir() -> Path:
         data_dir = Path(os.getcwd()) / "bcml-data"
     elif system() == "Windows":
         data_dir = Path(os.path.expandvars("%LOCALAPPDATA%")) / "bcml"
+    elif system() == "Darwin":
+        data_dir = Path.home() / "Library" / "Application Support" / "bcml"
     else:
         data_dir = Path.home() / ".config" / "bcml"
     if not data_dir.exists():
@@ -1574,6 +1576,8 @@ def get_7z_path():
     if system() == "Windows":
         return str(get_exec_dir() / "helpers" / "7z.exe")
     bundle_path = get_exec_dir() / "helpers" / "7z"
+    if system() == "Darwin":
+        bundle_path = get_exec_dir() / "helpers" / "7zz"
     if not os.access(bundle_path, os.X_OK):
         if not os.access(bundle_path, os.W_OK):
             raise PermissionError(

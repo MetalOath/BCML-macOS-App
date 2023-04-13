@@ -202,10 +202,10 @@ impl<'py, 'set> ModLinker<'py, 'set> {
                     // output folder entirely to make way for the new link.
                     remove_dir_all(&output).context("Failed to clear output folder")?;
                 }
-                #[cfg(target_os = "linux")]
+                #[cfg(unix)]
                 std::os::unix::fs::symlink(merged, &output)
                     .context("Failed to symlink output folder")?;
-                #[cfg(target_os = "windows")]
+                #[cfg(windows)]
                 {
                     match junction::create(&merged, &output) {
                         Ok(()) => (),
