@@ -39,7 +39,7 @@ npm run build --loglevel=error >/dev/null
 cd ../../
 
 echo "Compiling Rust extension module..."
-maturin develop --cargo-extra-args="--quiet" >/dev/null
+maturin develop -q >/dev/null
 
 echo "Done! You are now ready to work on BCML."
 echo "You can run with \`python -m bcml\` or build an installable wheel with \`maturin build\`."
