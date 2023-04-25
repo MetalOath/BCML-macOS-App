@@ -188,7 +188,7 @@ impl Settings {
                 #[cfg(target_os = "macos")]
                 return Some(dirs2::data_dir().expect("Big problems if no data dir").join("Cemu/graphicPacks/BreathOfTheWild_BCML"));
                 #[cfg(target_os = "linux")]
-                return Some("~/.local/share/cemu/graphicPacks/BreathOfTheWild_BCML".into());
+                return Some(dirs2::data_dir().expect("Big problems if no data dir").join("cemu/graphicPacks/BreathOfTheWild_BCML"));
             }
         } else {
             Some(self.export_dir_nx.clone())
