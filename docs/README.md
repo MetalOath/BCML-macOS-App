@@ -127,6 +127,42 @@ Steps to build from source:
 Note that on Linux, you can simply run `bootstrap.sh` to perform these steps
 automatically unless you would like more control.
 
+## macOS Setup
+
+Running BCML on macOS requires some additional setup.
+
+### Additional Prerequisites
+
+-   CMake 3.12 or later
+
+### Build from Source
+
+A `bootstrap_macos.sh` file is included to perform all of the build steps in a virtual environment. Read below for details to perform the steps manually.
+
+#### Intel
+
+Set the environment variable `MACOSX_DEPLOYMENT_TARGET` to `10.14` or higher, then follow the same steps as for building from source [above](#building-from-source).
+
+#### Apple Silicon
+
+PyQt5 has issues building on Apple Silicon, so this guide will use [Homebrew](https://brew.sh)'s prebuilt version. This means that Homebrew Python is required, and that the minimum required version is Python 3.9.
+```
+brew install python@3.9
+brew install pyqt@5
+/opt/homebrew/bin/python3.9 -m venv --system-site-packages venv
+source venv/bin/activate
+```
+and then follow the same steps as building from source above, starting from Step 2.
+You can also just run `bootstrap_macos.sh` to perform the above steps.
+
+Alternatively, Rosetta can be used to build for Intel, either by starting the Terminal through Rosetta, or with `arch -x86_64 ./bootstrap_macos.sh`
+
+### Install from Wheel
+
+Download the wheel corresponding to your architecture and Python version from [here](https://github.com/neebyA/BCML/releases), and install with `pip install <path_to_wheel>`, substituting in the correct file path, e.g. `pip install ~/Downloads/bcml-3.10.8-cp310-cp310-macosx_10_14_x86_64.whl`
+
+Note that on Apple Silicon you should still install `pyqt@5` and Python through Homebrew, or install the Intel binary using Rosetta.
+
 ## Usage and Troubleshooting
 
 For information on how to use BCML, see the Help dialog in-app or read the documentation
