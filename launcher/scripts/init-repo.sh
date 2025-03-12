@@ -41,14 +41,14 @@ echo -e "${BLUE}Next steps:${NC}"
 echo -e "1. Create a new repository on GitHub (https://github.com/new)"
 echo -e "2. Run the following commands to push to GitHub:"
 echo
-echo -e "   git remote add origin https://github.com/YourUsername/BCML-macOS-Launcher.git"
+echo -e "   git remote add origin https://github.com/YourUsername/BCML-macOS-App.git"
 echo -e "   git branch -M main"
 echo -e "   git push -u origin main"
 echo
 echo -e "3. Alternatively, to create a fork of the original BCML repository:"
 echo -e "   a. Fork https://github.com/neebyA/BCML on GitHub"
 echo -e "   b. Clone your fork locally"
-echo -e "   c. Add your BCML-macOS-Launcher as a directory in your fork"
+echo -e "   c. Add your launcher as a directory in your fork"
 echo -e "   d. Commit and push your changes to your fork"
 echo
 echo -e "${GREEN}Happy coding!${NC}"

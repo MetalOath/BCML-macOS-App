@@ -18,11 +18,7 @@ There are many ways to contribute to this project:
 
 4. **Documentation**: Help improve or correct the documentation.
 
-5. **Testing**: Try the application on different macOS versions and report any issues.
-
-## Project Overview
-
-This project is an integrated macOS application for BCML (BOTW Cross-Platform Mod Loader). The launcher serves as the central component with BCML built into it, creating a self-contained application that provides a complete BCML experience for macOS users.
+5. **Testing**: Try the application on different versions of macOS and report any issues.
 
 ## Development Setup
 
@@ -30,29 +26,23 @@ This project is an integrated macOS application for BCML (BOTW Cross-Platform Mo
 2. Clone your fork locally
 3. Create a feature branch (`git checkout -b feature/my-new-feature`)
 4. Make your changes
-5. Run the build script to test your changes (`./scripts/build.sh`)
+5. Run the build script to test your changes (`./launcher/scripts/build.sh`)
 6. Commit your changes (`git commit -am 'Add some feature'`)
 7. Push to the branch (`git push origin feature/my-new-feature`)
 8. Create a new Pull Request
 
 ## Project Structure
 
-The project is structured as an integrated application with these main components:
+The project is now structured as an integrated application with these main components:
 
 - `bcml/` - The BCML core Python package, included directly in the app
+- `launcher/` - The macOS application wrapper and build scripts
 - `app_launcher.py` - The central Python entry point integrating all components
 - `src/` - Rust extension code for BCML
-- `scripts/` - Build and utility scripts
-- `assets/` - Application assets including icons
+
+Please ensure your contributions maintain this integrated structure, treating the launcher as the central component with BCML built in.
 
 ## Style Guidelines
-
-### Python Style
-
-- Follow PEP 8 guidelines
-- Use Black for code formatting with a line length of 88 characters
-- Include docstrings for all functions, methods, and classes
-- Maintain type hints where appropriate
 
 ### Shell Scripting Style
 
@@ -61,25 +51,12 @@ The project is structured as an integrated application with these main component
 - Use lowercase for variable names and uppercase for constants
 - Include proper error handling
 
-### JSX/React Style (for BCML UI)
+### Python Style
 
-JSX should be formatted with Prettier, using the following settings:
-
-```json
-{
-    "prettier.arrowParens": "avoid",
-    "prettier.jsxBracketSameLine": true,
-    "prettier.printWidth": 88,
-    "prettier.tabWidth": 4,
-    "prettier.trailingComma": "none"
-}
-```
-
-### Rust Style
-
-- Use rustfmt for formatting
-- Follow the Rust API guidelines
-- Run clippy with warnings enabled
+- Follow PEP 8 guidelines
+- Use Black for code formatting
+- Include docstrings for all functions, methods, and classes
+- Maintain type hints where appropriate
 
 ### Git Commit Messages
 
@@ -109,10 +86,6 @@ Where `type` is one of:
 2. Make sure your code passes all existing tests
 3. The PR should work for macOS Catalina (10.15) and later
 4. A maintainer will review your PR and may request changes before merging
-
-## Special Considerations for BCML Components
-
-BOTW is an immensely complex game, and there are a number of new mergers that could be written. If you find an aspect of the game that can be complicated by mod conflicts, but BCML doesn't yet handle it, feel free to try writing a merger for it and submitting a PR.
 
 ## License
 

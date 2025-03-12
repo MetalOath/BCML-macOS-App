@@ -1,0 +1,202 @@
+{
+  "version": "1.0",
+  "rules": {
+    "bash": {
+      "indentation": {
+        "enabled": true,
+        "spaces": 2,
+        "description": "All bash scripts should use 2 spaces for indentation to maintain consistent code appearance."
+      },
+      "error_handling": {
+        "enabled": true,
+        "require_exit_codes": true,
+        "description": "Always handle errors and use appropriate exit codes to ensure robust script execution."
+      },
+      "variable_naming": {
+        "enabled": true,
+        "pattern": "^[a-z][a-zA-Z0-9_]*$",
+        "constants_pattern": "^[A-Z][A-Z0-9_]*$",
+        "description": "Use lowercase snake_case for variables and UPPERCASE_WITH_UNDERSCORES for constants."
+      },
+      "shellcheck": {
+        "enabled": true,
+        "level": "warning",
+        "description": "Run shellcheck on all shell scripts to find common bugs and potential issues."
+      },
+      "shebang": {
+        "enabled": true,
+        "required": true,
+        "value": "#!/bin/bash",
+        "description": "All executable shell scripts must start with #!/bin/bash for consistency."
+      }
+    },
+    "python": {
+      "indentation": {
+        "enabled": true,
+        "spaces": 4,
+        "description": "All Python code should use 4 spaces for indentation to maintain consistent code appearance."
+      },
+      "line_length": {
+        "enabled": true,
+        "max_length": 88,
+        "description": "Keep Python lines under 88 characters as per Black standards."
+      },
+      "docstrings": {
+        "enabled": true,
+        "style": "google",
+        "description": "Use Google-style docstrings for all functions, classes, and modules."
+      },
+      "imports": {
+        "enabled": true,
+        "grouped": true,
+        "alphabetical": true,
+        "description": "Group imports and sort alphabetically (stdlib, third-party, local)."
+      },
+      "naming": {
+        "enabled": true,
+        "variables": "snake_case",
+        "functions": "snake_case",
+        "classes": "PascalCase",
+        "constants": "UPPER_SNAKE_CASE",
+        "description": "Follow PEP 8 naming conventions for all identifiers."
+      }
+    },
+    "documentation": {
+      "readme": {
+        "enabled": true,
+        "required_sections": [
+          "Overview", 
+          "Installation", 
+          "Usage", 
+          "Requirements",
+          "Building from Source",
+          "License"
+        ],
+        "description": "README.md must contain all required sections to properly document the project."
+      },
+      "scripts": {
+        "enabled": true,
+        "header_required": true,
+        "header_template": "# {script_name}\n# Description: {description}\n# Author: {author}\n# Date: {date}\n",
+        "description": "All scripts should have a standardized header with name, description, author, and date."
+      },
+      "inline_comments": {
+        "enabled": true,
+        "complex_logic_threshold": 5,
+        "description": "Complex logic (more than 5 lines) should be documented with comments explaining the intent."
+      }
+    },
+    "security": {
+      "path_traversal": {
+        "enabled": true,
+        "description": "Avoid path traversal vulnerabilities by validating file paths before use."
+      },
+      "input_validation": {
+        "enabled": true,
+        "description": "Validate all user inputs to prevent unexpected behavior or security issues."
+      },
+      "environment_variables": {
+        "enabled": true,
+        "required_quote": true,
+        "description": "Always quote environment variable expansions to prevent word splitting and globbing."
+      }
+    },
+    "best_practices": {
+      "file_permissions": {
+        "enabled": true,
+        "executable_mask": "755",
+        "non_executable_mask": "644",
+        "description": "Set appropriate file permissions: 755 for executables and 644 for non-executables."
+      },
+      "maximum_line_length": {
+        "enabled": true,
+        "length": 100,
+        "description": "Keep lines under 100 characters for better readability."
+      },
+      "function_length": {
+        "enabled": true,
+        "maximum_lines": 50,
+        "description": "Functions should not exceed 50 lines to promote modularity."
+      },
+      "descriptive_variable_names": {
+        "enabled": true,
+        "minimum_length": 3,
+        "exceptions": ["i", "j", "k", "x", "y", "z"],
+        "description": "Use descriptive variable names with at least 3 characters (with common exceptions)."
+      }
+    },
+    "git": {
+      "commit_message": {
+        "enabled": true,
+        "pattern": "^(feat|fix|docs|style|refactor|test|chore)(\\(.+\\))?: .+",
+        "description": "Follow conventional commits format for clear and standardized commit messages."
+      },
+      "branch_naming": {
+        "enabled": true,
+        "pattern": "^(feature|bugfix|hotfix|release)/[a-z0-9-]+$",
+        "description": "Use descriptive branch names prefixed with the type of change."
+      },
+      "no_binary_files": {
+        "enabled": true,
+        "exceptions": ["assets/AppIcon.icns", "iconbuilder/icon.iconset/*.png", "bcml/data/*.png", "bcml/data/*.ico"],
+        "description": "Avoid committing binary files to the repository, with exceptions for necessary assets."
+      }
+    },
+    "xml_plist": {
+      "validation": {
+        "enabled": true,
+        "description": "Ensure all XML plist files are well-formed and valid according to DTD."
+      },
+      "indentation": {
+        "enabled": true,
+        "spaces": 4,
+        "description": "Use 4 spaces for indentation in XML/plist files for better readability."
+      }
+    },
+    "rust": {
+      "formatting": {
+        "enabled": true,
+        "tool": "rustfmt",
+        "description": "Format Rust code using rustfmt for consistent style."
+      },
+      "clippy": {
+        "enabled": true,
+        "level": "warn",
+        "description": "Run clippy lints at 'warn' level to catch common mistakes and improve code quality."
+      }
+    },
+    "project_structure": {
+      "required_directories": {
+        "enabled": true,
+        "directories": ["src", "bcml", "docs", "iconbuilder"],
+        "description": "Maintain a consistent project structure with required directories."
+      },
+      "src_organization": {
+        "enabled": true,
+        "description": "The src directory should contain Rust source files for the application."
+      },
+      "bcml_organization": {
+        "enabled": true,
+        "description": "The bcml directory should contain the Python package for BCML."
+      },
+      "docs_organization": {
+        "enabled": true,
+        "description": "The docs directory should contain detailed documentation."
+      }
+    }
+  },
+  "overrides": {
+    "bcml/assets/src/js/**": {
+      "maximum_line_length.length": 88
+    },
+    "**/Info.plist": {
+      "xml_plist.indentation.spaces": 4
+    },
+    "assets/**": {
+      "git.no_binary_files.enabled": false
+    },
+    "iconbuilder/**": {
+      "git.no_binary_files.enabled": false
+    }
+  }
+}

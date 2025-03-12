@@ -1,0 +1,59 @@
+#!/bin/bash
+# BCMLLauncher
+# Description: Integrated macOS application for BCML (BOTW Cross-Platform Mod Loader)
+# Author: BCML Launcher Team
+# Date: 2025-03-13
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CONFIG_PATH="${SCRIPT_DIR}/../Resources/config.json"
+APP_ROOT="${SCRIPT_DIR}/../../.."
+
+# Set necessary environment variables
+export QTWEBENGINE_DISABLE_SANDBOX=1
+export BCML_ROOT="${APP_ROOT}"
+export PYTHONPATH="${APP_ROOT}:${PYTHONPATH}"
+
+# Function to display an error dialog
+show_error() {
+  osascript -e "display dialog \"$1\" buttons {\"OK\"} default button \"OK\" with title \"BCML Error\" with icon stop"
+}
+
+# Load additional environment variables from config
+if [ -f "$CONFIG_PATH" ]; then
+  if command -v jq &> /dev/null; then
+    # Load environment variables
+    while IFS="=" read -r key value; do
+      if [ -n "$key" ]; then
+        export "$key"="$value"
+      fi
+    done < <(jq -r '.environment_variables | to_entries[] | "\(.key)=\(.value)"' "$CONFIG_PATH" 2>/dev/null || echo "")
+  fi
+fi
+
+# Execute the integrated Python launcher
+PYTHON_LAUNCHER="${APP_ROOT}/app_launcher.py"
+if [ -f "$PYTHON_LAUNCHER" ]; then
+  # Find the bundled Python or use system Python
+  if [ -f "${APP_ROOT}/Resources/bin/python3" ]; then
+    PYTHON_PATH="${APP_ROOT}/Resources/bin/python3"
+  else
+    # Try to find Python 3.9 or later
+    for py_ver in python3.11 python3.10 python3.9 python3; do
+      if command -v $py_ver &> /dev/null; then
+        PYTHON_PATH=$py_ver
+        break
+      fi
+    done
+  fi
+  
+  if [ -n "$PYTHON_PATH" ]; then
+    exec "$PYTHON_PATH" "$PYTHON_LAUNCHER"
+  else
+    show_error "Python 3.9 or later is required but was not found.\n\nPlease install Python 3.9+ using Homebrew."
+    exit 1
+  fi
+else
+  show_error "BCML launcher could not find app_launcher.py at '$PYTHON_LAUNCHER'.\n\nThe application may be corrupted."
+  exit 1
+fi

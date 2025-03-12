@@ -49,7 +49,7 @@ The development project is now integrated into the BCML project:
 ```
 BCML/
 ├── [BCML project files]
-├── BCML-macOS-Launcher/
+├── launcher/
 │   ├── .cline-rules.json     # Cline rules for code quality
 │   ├── .gitignore            # Git ignore patterns
 │   ├── CONTRIBUTING.md       # Contribution guidelines
@@ -57,8 +57,6 @@ BCML/
 │   ├── README.md             # Project documentation
 │   ├── assets/
 │   │   └── AppIcon.icns      # Application icon source
-│   ├── docs/
-│   │   └── app-structure.md  # This document
 │   ├── scripts/
 │   │   ├── build.sh          # Build script for creating the app bundle
 │   │   └── init-repo.sh      # Script to initialize Git repository
