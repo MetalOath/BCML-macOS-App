@@ -1,0 +1,7 @@
+{
+  "bcml_path": "../../../venv/bin/bcml",
+  "venv_activate_path": "../../../venv/bin/activate",
+  "environment_variables": {
+    "QTWEBENGINE_DISABLE_SANDBOX": "1"
+  }
+}
