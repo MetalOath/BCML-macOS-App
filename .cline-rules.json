@@ -209,9 +209,37 @@
     {
       "date": "2025-03-13",
       "attempt": "BCML-macOS-Launcher with embedded Python launcher",
-      "result": "Success",
-      "issue": "Using BCML-macOS-Launcher build with custom run_bcml.py script to handle Python environment",
+      "result": "In Progress",
+      "issue": "Working from terminal but not from Finder",
       "solution": "Built the app using the BCML-macOS-Launcher build script, then added our custom Python run_bcml.py script to the Resources directory. Fixed config.json formatting issues."
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Enhanced shell launcher with robust Python finder",
+      "result": "In Progress",
+      "issue": "Working from terminal but not from Finder",
+      "solution": "Added detailed debug logging to both shell and Python scripts. Fixed shebang line. Implemented robust Python executable search path and proper working directory handling. Added comprehensive error logging to diagnose Finder launch issues."
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Absolute path resolution",
+      "result": "In Progress", 
+      "issue": "Path resolution issues when launched from Finder vs Terminal",
+      "solution": "Used absolute paths for project root and venv directories instead of relative paths. Improved Python module path handling to ensure bcml module can be found regardless of launch method. Enhanced PYTHONPATH environment variable setup."
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Multiple import strategies",
+      "result": "In Progress",
+      "issue": "Import error: 'cannot import name bcml from bcml'",
+      "solution": "Implemented multiple fallback strategies for importing the bcml module: standard import, direct path import using importlib for more control, and as a last resort executing the bcml binary directly. Added detailed logging of each attempt."
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Direct binary execution",
+      "result": "Success",
+      "issue": "Import approaches still failing despite proper Python paths",
+      "solution": "Simplified approach by skipping Python module imports entirely and directly executing the bcml binary using subprocess. Maintained all environment setup and error handling capabilities while eliminating Python import complexities."
     }
   ]
 }
