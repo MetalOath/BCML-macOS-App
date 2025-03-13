@@ -1,7 +1,34 @@
 {
   "version": "1.0",
-  "project_objective": "Implementation of a self-contained macOS application packaging BCML with all dependencies in an isolated runtime environment to maintain source integrity of the original BCML codebase.",
+  "project_objective": "Implementation of a self-contained macOS application packaging BCML with all dependencies in an isolated runtime environment to maintain source integrity of the original BCML codebase. The primary focus is on wrapping the BCML project in a macOS launcher, NOT on modifying core BCML functionality.",
   "rules": {
+    "code_modification": {
+      "scope_restriction": {
+        "enabled": true,
+        "description": "Code modifications should be strictly limited to the macOS launcher components. Core BCML files should remain unmodified."
+      }
+    },
+    "python": {
+      "code_style": {
+        "enabled": true,
+        "formatter": "black",
+        "description": "Python code for the macOS launcher should be formatted with Black as specified in CONTRIBUTING.md. Does not apply to original BCML python files."
+      }
+    },
+    "javascript": {
+      "jsx_formatting": {
+        "enabled": true,
+        "formatter": "prettier",
+        "settings": {
+          "arrowParens": "avoid",
+          "jsxBracketSameLine": true,
+          "printWidth": 88,
+          "tabWidth": 4,
+          "trailingComma": "none"
+        },
+        "description": "JSX for the macOS launcher should be formatted with Prettier using the specified settings as documented in CONTRIBUTING.md. Does not apply to original BCML javascript files."
+      }
+    },
     "bash": {
       "error_handling": {
         "enabled": true,
@@ -50,13 +77,76 @@
         "enabled": true,
         "directories": ["src", "bcml", "docs", "iconbuilder"],
         "description": "Maintain a consistent project structure with required directories."
+      },
+      "macos_app_bundle": {
+        "enabled": true,
+        "required_structure": [
+          "Contents/Info.plist",
+          "Contents/MacOS/BCMLLauncher",
+          "Contents/PkgInfo", 
+          "Contents/Resources/AppIcon.icns"
+        ],
+        "description": "macOS application bundle must follow standard structure with required files as documented in app-structure.md."
+      },
+      "bnp_structure": {
+        "enabled": true,
+        "wiiu_structure": [
+          "content",
+          "aoc (optional)",
+          "patches (optional)",
+          "options (optional)"
+        ],
+        "switch_structure": [
+          "01007EF00011E000/romfs",
+          "01007EF00011F001/romfs (optional)",
+          "options (optional)"
+        ],
+        "description": "BNP mods must follow the specified folder structure for Wii U or Switch as documented in bnp.md."
       }
     },
     "source_control": {
       "original_bcml_files": {
         "enabled": true,
+        "priority": "critical",
         "source_repo": "https://github.com/neebyA/BCML",
-        "description": "Do not modify 'bcml' project files that originated from the original BCML repository."
+        "description": "Do not modify 'bcml' project files that originated from the original BCML repository. The integrity of the original BCML codebase must be maintained."
+      }
+    },
+    "application_behavior": {
+      "error_handling": {
+        "enabled": true,
+        "remerge_first": true,
+        "description": "Always try using the Remerge button first when encountering problems with mods as specified in trouble.md."
+      },
+      "mod_installation": {
+        "enabled": true,
+        "validate_load_order": true,
+        "description": "Ensure proper mod load order with higher priority mods placed at the top of the list as documented in mods.md."
+      },
+      "environment_variables": {
+        "enabled": true,
+        "required_vars": ["QTWEBENGINE_DISABLE_SANDBOX=1"],
+        "description": "Set required environment variables for the macOS launcher as specified in app-structure.md."
+      }
+    },
+    "licensing": {
+      "bcml_license": {
+        "enabled": true,
+        "license_type": "GPL-3.0-or-later",
+        "description": "The BCML software is licensed under the GNU General Public License, version 3 or later."
+      },
+      "launcher_license": {
+        "enabled": true,
+        "license_type": "MIT",
+        "description": "The macOS Launcher is licensed under the MIT License."
+      },
+      "third_party": {
+        "enabled": true,
+        "components": [
+          {"name": "7-Zip", "license": "LGPL", "credit_required": true},
+          {"name": "pywebview", "license": "BSD-3-Clause", "credit_required": true}
+        ],
+        "description": "Third-party components must be properly credited with their respective licenses."
       }
     }
   },
@@ -66,6 +156,11 @@
     },
     "iconbuilder/**": {
       "git.no_binary_files.enabled": false
+    },
+    "bcml/**": {
+      "python.code_style.enabled": false,
+      "javascript.jsx_formatting.enabled": false,
+      "code_modification.scope_restriction.enabled": true
     }
   },
   "build_attempts": []
