@@ -5,6 +5,7 @@
   "settings": {
     "use_bundled_resources": true,
     "bundled_python_lib_path": "Contents/Resources/lib",
-    "bundled_bcml_path": "Contents/Resources/bcml"
+    "bundled_bcml_path": "Contents/Resources/bcml",
+    "python_launcher_path": "app_launcher.py"
   }
 }

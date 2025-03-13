@@ -7,7 +7,7 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIG_PATH="${SCRIPT_DIR}/../Resources/config.json"
-APP_ROOT="${SCRIPT_DIR}/../../.."
+APP_ROOT="${SCRIPT_DIR}/../.."
 
 # Set necessary environment variables
 export QTWEBENGINE_DISABLE_SANDBOX=1
@@ -38,8 +38,8 @@ if [ -f "$PYTHON_LAUNCHER" ]; then
   if [ -f "${APP_ROOT}/Resources/bin/python3" ]; then
     PYTHON_PATH="${APP_ROOT}/Resources/bin/python3"
   else
-    # Try to find Python 3.9 or later
-    for py_ver in python3.11 python3.10 python3.9 python3; do
+    # Prefer Python 3.9 to match our compiled extensions, then try others
+    for py_ver in python3.9 python3.10 python3.11 python3; do
       if command -v $py_ver &> /dev/null; then
         PYTHON_PATH=$py_ver
         break
