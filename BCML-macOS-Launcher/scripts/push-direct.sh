@@ -37,7 +37,7 @@ git init
 
 # Update README for the fork
 echo -e "${YELLOW}Updating README for the repository...${NC}"
-sed -i '' "s|https://github.com/YourUsername/BCML-macOS-App|$REPO_URL|g" README.md || true
+sed -i '' "s|https://github.com/YourUsername/BCML-macOS-Launcher|$REPO_URL|g" README.md || true
 
 # Add files
 echo -e "${YELLOW}Adding files to git...${NC}"

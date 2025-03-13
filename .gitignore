@@ -1,12 +1,14 @@
-# Project-specific files
 /data
 /mods
+/.vscode
 data/master.srsizetable
 /bcml/assets/help
 /helpers/__pycache__
 /tmp
 error.log
 .cdir
+/build
+/dist
 /bcml.egg-info
 /bcml/data/master.srsizetable
 /bcml/__pycache__
@@ -14,32 +16,9 @@ error.log
 /pystonvenv
 /work_dir
 /bcml/work_dir
+/.idea
 bcml/tmp.py
 tmp.py
-
-# macOS specific files
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Build artifacts
-/build
-/dist
-*.dmg
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

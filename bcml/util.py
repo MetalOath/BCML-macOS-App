@@ -37,53 +37,7 @@ import xxhash  # pylint: disable=wrong-import-order
 from oead.aamp import ParameterIO, ParameterList  # pylint:disable=import-error
 from webview import Window  # pylint: disable=wrong-import-order
 
-try:
-    from bcml import bcml as rsext
-except ImportError:
-    # Create a dummy module to prevent import errors when Rust extension is missing
-    class DummyModule:
-        def __getattr__(self, name):
-            if name == "manager":
-                return DummyManagerModule()
-            return lambda *args, **kwargs: None
-
-        def find_modified_files(self, directory):
-            # Fallback implementation to find modified files when the Rust extension is missing
-            # Uses pythonic approach to find files that might be modded
-            print("Warning: Using slow Python fallback to find modified files")
-            result = []
-            dir_path = Path(directory)
-            for item in dir_path.rglob("*"):
-                if item.is_file() and not item.name.startswith('.'):
-                    try:
-                        # Add files to result list, particularly focusing on known mod file types
-                        if item.suffix in {'.sbactorpack', '.pack', '.spack', '.sarc', '.ssarc', 
-                                          '.sbyml', '.byml', '.sbfres', '.bfres', '.sbitemico', 
-                                          '.bitemico', '.srsizetable'}:
-                            result.append(str(item.relative_to(dir_path)))
-                    except ValueError:
-                        pass
-            return result
-
-    class DummyManagerModule:
-        @staticmethod
-        def create_shortcut(*args, **kwargs):
-            return True
-            
-        @staticmethod
-        def link_master_mod(output=None):
-            from shutil import copytree
-            if output:
-                modpack_dir = get_modpack_dir()
-                if modpack_dir.exists():
-                    if Path(output).exists():
-                        shutil.rmtree(output)
-                    copytree(modpack_dir, output)
-            return True
-
-    rsext = DummyModule()
-
-from bcml import locks
+from bcml import bcml as rsext, locks
 from bcml import pickles, DEBUG  # pylint: disable=unused-import
 from bcml.__version__ import VERSION
 

@@ -39,5 +39,5 @@ mslnk = "0.1.8"
 remove_dir_all = "0.7.0"
 
 [profile.release]
-lto = false
+lto = "fat"
 codegen-units = 1

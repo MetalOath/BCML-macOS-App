@@ -23,7 +23,7 @@ import requests
 import webview
 
 from bcml import DEBUG, install, dev, locks, mergers, upgrade, util
-from bcml.util import BcmlMod, LOG, SYSTEM, get_7z_path, rsext
+from bcml.util import BcmlMod, LOG, SYSTEM, get_7z_path
 from bcml.__version__ import USER_VERSION, VERSION
 
 

@@ -1,6 +1,6 @@
-# Contributing to BCML Integrated macOS Application
+# Contributing to BCML with macOS Launcher
 
-Thank you for your interest in contributing to the BCML Integrated macOS Application! This document provides guidelines and instructions for contributing to this project.
+Thank you for your interest in contributing to BCML and BCML macOS Launcher! This document provides guidelines and instructions for contributing to this project.
 
 ## Code of Conduct
 
@@ -18,52 +18,13 @@ There are many ways to contribute to this project:
 
 4. **Documentation**: Help improve or correct the documentation.
 
-5. **Testing**: Try the application on different macOS versions and report any issues.
+5. **Testing**: Try the application on different platforms (Windows, Linux, macOS) and report any issues.
 
-## Project Overview
+## Development Setup for BCML
 
-This project is an integrated macOS application for BCML (BOTW Cross-Platform Mod Loader). The launcher serves as the central component with BCML built into it, creating a self-contained application that provides a complete BCML experience for macOS users.
+BOTW is an immensely complex game, and there are a number of new mergers that could be written. If you find an aspect of the game that can be complicated by mod conflicts, but BCML doesn't yet handle it, feel free to try writing a merger for it and submitting a PR.
 
-## Development Setup
-
-1. Fork the repository on GitHub
-2. Clone your fork locally
-3. Create a feature branch (`git checkout -b feature/my-new-feature`)
-4. Make your changes
-5. Run the build script to test your changes (`./scripts/build.sh`)
-6. Commit your changes (`git commit -am 'Add some feature'`)
-7. Push to the branch (`git push origin feature/my-new-feature`)
-8. Create a new Pull Request
-
-## Project Structure
-
-The project is structured as an integrated application with these main components:
-
-- `bcml/` - The BCML core Python package, included directly in the app
-- `app_launcher.py` - The central Python entry point integrating all components
-- `src/` - Rust extension code for BCML
-- `scripts/` - Build and utility scripts
-- `assets/` - Application assets including icons
-
-## Style Guidelines
-
-### Python Style
-
-- Follow PEP 8 guidelines
-- Use Black for code formatting with a line length of 88 characters
-- Include docstrings for all functions, methods, and classes
-- Maintain type hints where appropriate
-
-### Shell Scripting Style
-
-- Use 2 spaces for indentation
-- Add comments to explain complex logic
-- Use lowercase for variable names and uppercase for constants
-- Include proper error handling
-
-### JSX/React Style (for BCML UI)
-
-JSX should be formatted with Prettier, using the following settings:
+Python and JSX code for BCML is subject to formatting standards. Python should be formatted with Black. JSX should be formatted with Prettier, using the following settings:
 
 ```json
 {
@@ -75,11 +36,25 @@ JSX should be formatted with Prettier, using the following settings:
 }
 ```
 
-### Rust Style
+## Development Setup for macOS Launcher
 
-- Use rustfmt for formatting
-- Follow the Rust API guidelines
-- Run clippy with warnings enabled
+1. Fork the repository on GitHub
+2. Clone your fork locally
+3. Create a feature branch (`git checkout -b feature/my-new-feature`)
+4. Make your changes
+5. Run the build script to test your changes (`./BCML-macOS-Launcher/scripts/build.sh`)
+6. Commit your changes (`git commit -am 'Add some feature'`)
+7. Push to the branch (`git push origin feature/my-new-feature`)
+8. Create a new Pull Request
+
+## Style Guidelines
+
+### Shell Scripting Style for macOS Launcher
+
+- Use 2 spaces for indentation
+- Add comments to explain complex logic
+- Use lowercase for variable names and uppercase for constants
+- Include proper error handling
 
 ### Git Commit Messages
 
@@ -107,18 +82,14 @@ Where `type` is one of:
 
 1. Update the README.md or documentation with details of any changes if applicable
 2. Make sure your code passes all existing tests
-3. The PR should work for macOS Catalina (10.15) and later
+3. For macOS Launcher changes, the PR should work for macOS Catalina (10.15) and later
 4. A maintainer will review your PR and may request changes before merging
-
-## Special Considerations for BCML Components
-
-BOTW is an immensely complex game, and there are a number of new mergers that could be written. If you find an aspect of the game that can be complicated by mod conflicts, but BCML doesn't yet handle it, feel free to try writing a merger for it and submitting a PR.
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under:
-- MIT License for the macOS application components
-- GNU General Public License v3 for BCML core components
+By contributing to the BCML project, you agree that your contributions will be licensed under the project's GNU General Public License v3.0.
+
+By contributing to the macOS Launcher, you agree that your contributions will be licensed under the MIT License.
 
 ## Questions?
 

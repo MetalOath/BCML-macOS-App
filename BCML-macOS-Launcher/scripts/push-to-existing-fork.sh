@@ -50,7 +50,7 @@ cp -r "$BCML_DIR/".[!.]* "$TEMP_CLONE_DIR/" 2>/dev/null || true  # Copy hidden f
 
 # Step 4: Update README for the fork
 echo -e "${YELLOW}Updating README for the fork...${NC}"
-sed -i '' "s|https://github.com/YourUsername/BCML-macOS-App|$REPO_URL|g" README.md || true
+sed -i '' "s|https://github.com/YourUsername/BCML-macOS-Launcher|$REPO_URL|g" README.md || true
 
 # Step 5: Add all files
 echo -e "${YELLOW}Adding files to Git repository...${NC}"
@@ -81,7 +81,7 @@ echo -e "${YELLOW}To build the application:${NC}"
 echo -e "1. Clone your repository locally:"
 echo -e "   git clone $REPO_URL"
 echo -e "2. Run the build script:"
-echo -e "   cd BCML-macOS-App"
+echo -e "   cd BCML-MacOS-App"
 echo -e "   ./scripts/build.sh"
 echo
 echo -e "${GREEN}The macOS launcher is now ready to be shared with the community!${NC}"

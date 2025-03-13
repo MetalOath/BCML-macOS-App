@@ -1,8 +1,8 @@
 ![BCML Logo](https://i.imgur.com/OiqKPx0.png)
 
-# BCML: Integrated macOS Application for BOTW Mod Loader
+# BCML: BOTW Cross-Platform Mod Loader with macOS Launcher
 
-A standalone macOS application for _The Legend of Zelda: Breath of the Wild_ mod management, with BCML (BOTW Cross-Platform Mod Loader) fully integrated.
+A mod merging and managing tool for _The Legend of Zelda: Breath of the Wild_ with a native macOS application launcher.
 
 ![BCML Banner](https://i.imgur.com/vmZanVl.png)
 
@@ -167,18 +167,16 @@ Steps to build from source:
 Note that on Linux, you can simply run `bootstrap.sh` to perform these steps
 automatically unless you would like more control.
 
-## BCML macOS Integrated Application
+## BCML macOS Launcher
 
-The project has been restructured to make the macOS launcher the central component with BCML fully integrated into it. This creates a standalone macOS application that provides a complete BCML experience without requiring separate installation steps. The integrated approach offers:
+The BCML-macOS-Launcher is a simple, lightweight wrapper application that allows users to launch BCML directly from their Applications folder or Dock, without needing to use Terminal commands. This project streamlines the user experience for macOS users by:
 
-- A native macOS application experience with no Terminal knowledge required
-- One-click installation via DMG file
-- All required dependencies bundled within the application
-- Automatic environment configuration for optimal performance
-- Seamless updates through application replacement
-- Visually appealing icon in your Dock and Applications folder
+- Providing a native macOS application experience
+- Setting required environment variables automatically (including `QTWEBENGINE_DISABLE_SANDBOX=1`)
+- Ensuring a smooth integration with macOS
+- Offering a visually appealing icon in your Dock and Applications folder
 
-### Installation of BCML macOS App
+### Installation of macOS Launcher
 
 #### Method 1: Download and Install the Pre-built App
 
@@ -187,34 +185,33 @@ The project has been restructured to make the macOS launcher the central compone
 3. Drag the BCML app to your Applications folder
 4. Unmount the DMG by dragging it to the Trash
 
-#### Method 2: Build the Application from Source
+#### Method 2: Build the Launcher from Source
 
 1. Make the build script executable:
    ```bash
-   chmod +x launcher/scripts/build.sh
+   chmod +x BCML-macOS-Launcher/scripts/build.sh
    ```
 
 2. Run the build script:
    ```bash
-   ./launcher/scripts/build.sh
+   ./BCML-macOS-Launcher/scripts/build.sh
    ```
 
-3. The built application will be available in the `launcher/build` directory, along with a DMG file
+3. The built application will be available in the `BCML-macOS-Launcher/build` directory, along with a DMG file ready for distribution
 
-### Using the BCML macOS App
+### Using the macOS Launcher
 
 1. Launch BCML from your Applications folder or Dock
 2. If launching for the first time, you may need to right-click (or Control+click) the app and select "Open" to bypass macOS security restrictions
-3. BCML will launch with all components properly configured
+3. BCML will launch with the appropriate environment settings
 
-### Troubleshooting the BCML macOS App
+### Troubleshooting the macOS Launcher
 
 If you encounter issues:
 
-- Check the logs in `~/Library/Logs/BCML/bcml.log` for detailed error information
-- Ensure your system meets the minimum requirements (macOS 10.15 Catalina or later)
+- Ensure BCML is properly installed with all dependencies
+- Check that the virtual environment is activated and BCML works when run from Terminal
 - For permission errors, ensure the app has execution permissions
-- If experiencing graphical issues, try launching with the Terminal command: `open -a BCML --args --disable-gpu`
 
 ## Usage and Troubleshooting
 
@@ -249,11 +246,11 @@ settings:
 
 ## License
 
-The BCML core components are licensed under the terms of the GNU General Public License, version 3
+The BCML software is licensed under the terms of the GNU General Public License, version 3
 or later. The source is publicly available on
 [GitHub](https://github.com/NiceneNerd/BCML).
 
-The macOS application integration components are licensed under the MIT License.
+The macOS Launcher is licensed under the MIT License.
 
 This software includes the 7-Zip console application `7z.exe` and the library `7z.dll`,
 which are licensed under the GNU Lesser General Public License. The source code for this
@@ -267,5 +264,5 @@ original library is available for free at <https://github.com/r0x0r/pywebview>.
 
 - [NiceneNerd](https://github.com/NiceneNerd) for the original BCML
 - [neebyA](https://github.com/neebyA) for the macOS fork of BCML
-- [MetalOath](https://github.com/MetalOath) for the integrated macOS application
+- [MetalOath](https://github.com/MetalOath) for the macOS Launcher integration
 - The BOTW modding community

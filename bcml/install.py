@@ -23,11 +23,7 @@ from xml.dom import minidom
 import oead
 
 from bcml import util, mergers, dev, upgrade
-try:
-    from bcml import bcml as rsext
-except ImportError:
-    # Use the dummy module from util if the Rust extension is missing
-    rsext = util.rsext
+from bcml import bcml as rsext
 from bcml.util import SYSTEM, BcmlMod, get_7z_path
 
 

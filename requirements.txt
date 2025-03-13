@@ -1,4 +1,3 @@
-# Core dependencies
 botw-utils~=0.2.3
 cefpython3~=66.1; platform_system == 'Windows'
 oead~=1.2.6
@@ -10,12 +9,4 @@ pywebview==3.7.2
 QtPy; platform_system == 'Linux' or platform_system == 'Darwin'
 requests~=2.26.0
 rstb>=1.2.2
-xxhash~=3.2.0; python_version >= '3.9'  # C-extensions compiled specifically for Python 3.9+
-
-# Notes:
-# - The Rust extension (bcml.so) is compiled during build but is optional
-#   as fallback mechanisms have been implemented in the code
-# - On macOS, ensure 7zz executable permissions are set
-
-# Development environment - ensure these match
-python_version >= '3.9'
+xxhash~=3.2
