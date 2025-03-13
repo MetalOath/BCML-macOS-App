@@ -163,5 +163,55 @@
       "code_modification.scope_restriction.enabled": true
     }
   },
-  "build_attempts": []
+  "build_attempts": [
+    {
+      "date": "2025-03-13",
+      "attempt": "Bootstrap script",
+      "result": "Failed",
+      "issue": "Rust compilation error with 'const_slice_index' feature",
+      "solution": "Installed pre-built wheel file instead"
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "py2app build",
+      "result": "Failed",
+      "issue": "Missing pyqtwebengine module",
+      "solution": "Install pyqtwebengine explicitly"
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "BCML-macOS-Launcher build script",
+      "result": "Success",
+      "issue": null,
+      "solution": "Used the dedicated macOS launcher build script instead of py2app directly"
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Custom Python wrapper",
+      "result": "Failed",
+      "issue": "Import issues with bcml module and Rust extension",
+      "solution": "Created improved wrapper with better module patching"
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Dedicated test script",
+      "result": "Success",
+      "issue": null,
+      "solution": "Created a standalone Python script that properly sets up the environment and launches BCML"
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "Integrated solution",
+      "result": "In Progress",
+      "issue": null,
+      "solution": "Combined BCML-macOS-Launcher with py2app for a comprehensive solution. Created a central run_bcml.py script to handle Python environment setup and proper import paths. Updated app_launcher.py to handle both development and production modes. Uses direct module imports rather than relying on external scripts."
+    },
+    {
+      "date": "2025-03-13",
+      "attempt": "BCML-macOS-Launcher with embedded Python launcher",
+      "result": "Success",
+      "issue": "Using BCML-macOS-Launcher build with custom run_bcml.py script to handle Python environment",
+      "solution": "Built the app using the BCML-macOS-Launcher build script, then added our custom Python run_bcml.py script to the Resources directory. Fixed config.json formatting issues."
+    }
+  ]
 }

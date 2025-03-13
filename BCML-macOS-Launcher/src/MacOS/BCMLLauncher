@@ -2,37 +2,33 @@
 # BCMLLauncher
 # Description: macOS application launcher for BCML (BOTW Cross-Platform Mod Loader)
 # Author: BCML Launcher Team
-# Date: 2025-03-12
+# Date: 2025-03-13
+
+# Exit on error
+set -e
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CONFIG_PATH="${SCRIPT_DIR}/../Resources/config.json"
+RESOURCES_DIR="${SCRIPT_DIR}/../Resources"
+CONFIG_PATH="${RESOURCES_DIR}/config.json"
+PYTHON_LAUNCHER="${RESOURCES_DIR}/run_bcml.py"
 
 # Function to load configuration from JSON
 load_config() {
+  # Set required environment variables
+  export QTWEBENGINE_DISABLE_SANDBOX=1
+  
+  # Try to load additional environment variables from config
   if [ -f "$CONFIG_PATH" ]; then
-    # Try to use jq if available
+    # Use jq if available
     if command -v jq &> /dev/null; then
-      BCML_PATH=$(jq -r '.bcml_path' "$CONFIG_PATH")
-      VENV_ACTIVATE_PATH=$(jq -r '.venv_activate_path' "$CONFIG_PATH")
       # Load environment variables
       while IFS="=" read -r key value; do
         if [ -n "$key" ]; then
           export "$key"="$value"
         fi
-      done < <(jq -r '.environment_variables | to_entries[] | "\(.key)=\(.value)"' "$CONFIG_PATH")
-    else
-      # Fallback to grep/sed if jq not available
-      BCML_PATH=$(grep -o '"bcml_path": *"[^"]*"' "$CONFIG_PATH" | sed 's/"bcml_path": *"\([^"]*\)"/\1/')
-      VENV_ACTIVATE_PATH=$(grep -o '"venv_activate_path": *"[^"]*"' "$CONFIG_PATH" | sed 's/"venv_activate_path": *"\([^"]*\)"/\1/')
-      # Set known environment variables
-      export QTWEBENGINE_DISABLE_SANDBOX=1
+      done < <(jq -r '.environment_variables | to_entries[] | "\(.key)=\(.value)"' "$CONFIG_PATH" 2>/dev/null || echo "")
     fi
-  else
-    # Default values if config.json doesn't exist
-    BCML_PATH="$(cd "$SCRIPT_DIR/../../../../" && pwd)/venv/bin/bcml"
-    VENV_ACTIVATE_PATH="$(cd "$SCRIPT_DIR/../../../../" && pwd)/venv/bin/activate"
-    export QTWEBENGINE_DISABLE_SANDBOX=1
   fi
 }
 
@@ -41,21 +37,31 @@ show_error() {
   osascript -e "display dialog \"$1\" buttons {\"OK\"} default button \"OK\" with title \"BCML Error\" with icon stop"
 }
 
-# Load configuration
+# Load environment variables
 load_config
 
-# Check if BCML is installed
-if [ -f "$BCML_PATH" ]; then
-  # Activate the virtual environment and run BCML
-  if [ -f "$VENV_ACTIVATE_PATH" ]; then
-    source "$VENV_ACTIVATE_PATH"
-    exec "$BCML_PATH"
+# Check if Python launcher exists
+if [ -f "$PYTHON_LAUNCHER" ]; then
+  # Set executable permission
+  chmod +x "$PYTHON_LAUNCHER"
+  
+  # Find the bundled Python executable
+  if [ -f "${RESOURCES_DIR}/bin/python3" ]; then
+    PYTHON="${RESOURCES_DIR}/bin/python3"
   else
-    show_error "Virtual environment activation script not found at '$VENV_ACTIVATE_PATH'.\n\nPlease check your installation."
-    exit 1
+    # Fall back to system Python
+    PYTHON=$(which python3 || which python || echo "")
+    
+    if [ -z "$PYTHON" ]; then
+      show_error "Python not found. Please install Python 3.9 or later."
+      exit 1
+    fi
   fi
+  
+  # Launch BCML
+  exec "$PYTHON" "$PYTHON_LAUNCHER"
 else
-  # Show error message if BCML is not found
-  show_error "BCML not found at '$BCML_PATH'.\n\nPlease make sure you have installed BCML using the instructions in the repository."
+  # Show error message if the launcher script is not found
+  show_error "BCML launcher script not found at '$PYTHON_LAUNCHER'.\n\nPlease check your installation."
   exit 1
 fi
